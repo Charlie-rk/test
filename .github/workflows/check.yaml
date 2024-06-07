@@ -10,35 +10,57 @@ on:
   workflow_dispatch:
 
 jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Update version
+        run: echo "Updating version"
+        shell: bash
+
+  staging:
+    runs-on: ubuntu-latest
+    needs: update-version
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Staging
+        run: echo "Staging environment setup"
+        shell: bash
+
   t1:
     runs-on: ubuntu-latest
+    needs: staging
     environment: 
       name: t1-production
       # url: https://example.com/t1-approval # Replace with the actual approval URL if needed
     steps:
       - uses: actions/checkout@v2
-      - name: hello world
+      - name: Hello world
         run: echo "Hello world from T1"
         shell: bash
 
   t2:
     runs-on: ubuntu-latest
+    needs: staging
     environment: 
       name: t2-production
       # url: https://example.com/t2-approval # Replace with the actual approval URL if needed
     steps:
       - uses: actions/checkout@v2
-      - name: hello world
+      - name: Hello world
         run: echo "Hello world from T2"
         shell: bash
 
   t3:
     runs-on: ubuntu-latest
+    needs: staging
     environment: 
       name: t3-production
       # url: https://example.com/t3-approval # Replace with the actual approval URL if needed
     steps:
       - uses: actions/checkout@v2
-      - name: hello world
+      - name: Hello world
         run: echo "Hello world from T3"
         shell: bash
