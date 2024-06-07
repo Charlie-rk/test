@@ -1,4 +1,4 @@
-name: hello world workflow
+name: Hello World Workflow
 
 on:
   push:
@@ -10,17 +10,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello:
+  t1:
     runs-on: ubuntu-latest
+    environment: 
+      name: t1-production
+      # url: https://example.com/t1-approval # Replace with the actual approval URL if needed
     steps:
       - uses: actions/checkout@v2
       - name: hello world
-        run: echo "Hello world"
+        run: echo "Hello world from T1"
         shell: bash
 
-  goodbye:
+  t2:
     runs-on: ubuntu-latest
+    environment: 
+      name: t2-production
+      # url: https://example.com/t2-approval # Replace with the actual approval URL if needed
     steps:
-      - name: goodbye world
-        run: echo "Goodbye world"
+      - uses: actions/checkout@v2
+      - name: hello world
+        run: echo "Hello world from T2"
+        shell: bash
+
+  t3:
+    runs-on: ubuntu-latest
+    environment: 
+      name: t3-production
+      # url: https://example.com/t3-approval # Replace with the actual approval URL if needed
+    steps:
+      - uses: actions/checkout@v2
+      - name: hello world
+        run: echo "Hello world from T3"
         shell: bash
